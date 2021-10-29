@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        USER_ID: ${USER_ID:?err}
+        GROUP_ID: ${GROUP_ID:?err}
+    volumes:
+      - .:/home/www-data/app
+      - ./php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ~/.ssh:/home/www-data/.ssh
+      - ~/.composer:/home/www-data/.composer
+      - ~/.symfony:/home/www-data/.symfony
+      - ~/.gitconfig:/home/www-data/.gitconfig
+      - ~/.ash_history:/home/www-data/.ash_history
+    environment:
+      - XDEBUG_CONFIG=client_host=${DOCKER_GATEWAY_HOST:-host.docker.internal}
+      - PHP_IDE_CONFIG=serverName=invoicing
+    tty: true
+    stdin_open: true
