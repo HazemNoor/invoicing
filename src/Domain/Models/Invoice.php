@@ -165,13 +165,16 @@ class Invoice
      */
     private function getItemIndex(Item $item): ?int
     {
+        $index = null;
+
         foreach ($this->items as $anIndex => $anItem) {
             if ($anItem->getId() === $item->getId()) {
-                return $anIndex;
+                $index = $anIndex;
+                break;
             }
         }
 
-        return null;
+        return $index;
     }
 
     public function getPrice(): Price

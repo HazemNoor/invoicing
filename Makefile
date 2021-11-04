@@ -20,3 +20,6 @@ install:
 
 test:
 	docker compose exec -u $(USER_ID):$(GROUP_ID) --env XDEBUG_MODE=off --env=COMPOSER_MEMORY_LIMIT=-1 app composer run-script --timeout=0 test
+
+coverage:
+	docker compose exec -u $(USER_ID):$(GROUP_ID) --env XDEBUG_MODE=coverage --env=COMPOSER_MEMORY_LIMIT=-1 app composer run-script --timeout=0 coverage
